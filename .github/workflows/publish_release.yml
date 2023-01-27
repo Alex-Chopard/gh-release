@@ -1,6 +1,6 @@
 # see: https://github.com/thomaseizinger/github-action-gitflow-release-workflow
 
-name: "Create Release Tag"
+name: "2 - Create Release Tag"
 
 on:
   pull_request:
@@ -45,10 +45,8 @@ jobs:
           
       - name: Create Tag
         run: |
-          git tag -a v${{ env.RELEASE_VERSION }} -m "v${{ env.RELEASE_VERSION }}"
-          git push --tags
-          echo ${{ github.event }}
-      
+          git tag -a v${{ env.RELEASE_VERSION }} -m "v${{ env.RELEASE_VERSION }}\n\tSee: #${{ github.event.number }} for more details."
+          git push --tags      
           
           
           
