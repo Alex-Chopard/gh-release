@@ -15,9 +15,12 @@ on:
         default: false
 
 jobs:
-  draft-release:
+  draft_release:
     name: Draft Release
     runs-on: ubuntu-latest
+    outputs:
+      pr_number: ${{ steps.cpr.outputs.pull-request-number }}
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -50,8 +53,7 @@ jobs:
           branch: release/${{ github.event.inputs.version }}
           delete-branch: true
           title: Merge Release v${{ github.event.inputs.version }}
-      
-      
+
       - name: Automatically Merge the Pull Request
         if: github.event.inputs.auto_merge_pr == 'true'
         env:
@@ -61,12 +63,13 @@ jobs:
             --delete-branch \
             --merge
           
-          
+  create_tag:
+    needs: draft_release
+    uses: Alex-Chopard/gh-release/.github/workflows/create_tag.yml@main
+    if: github.event.inputs.auto_merge_pr == 'true'
+    with:
+      release_version: ${{ needs.gather_versions.outputs.release_version }}
+      pr_number: ${{ github.event.number }}
+      
 
-#        uses: juliangruber/merge-pull-request-action@v1
- #       with:
- #         github-token: ${{ secrets.GITHUB_TOKEN }}
- #         number: ${{ steps.cpr.outputs.pull-request-number }}
- #         method: merge
-          
         
