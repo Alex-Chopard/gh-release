@@ -1,0 +1,39 @@
+# see: https://github.com/thomaseizinger/github-action-gitflow-release-workflow
+
+name: "2.2 - Create Tag"
+
+on:
+  workflow_call:
+    inputs:
+      release_version:
+        required: true
+        type: string
+      pr_number:
+        required: true
+        type: number
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Initialize mandatory git config
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          
+      - name: Create Tag
+        run: |
+          git tag -a v${{ inputs.release_version }} \
+            -m "v${{ inputs.release_version }}" \
+            -m "See: #${{ inputs.pr_number }} for more details."
+          git push --tags 
+          
+          
+          
+          
