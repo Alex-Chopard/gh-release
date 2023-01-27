@@ -26,6 +26,7 @@ jobs:
           git checkout develop
           git pull --rebase
           git checkout main
+          git pull --rebase
           git merge develop
 
       - name: Bump version in package.json
