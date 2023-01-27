@@ -58,7 +58,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr merge ${{ steps.cpr.outputs.pull-request-number }} \
-            --author-email github-actions@github.com \
+            --author-email ${{ github.event.sender.email }} \
             --delete-branch \
             --merge
           
