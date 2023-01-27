@@ -43,8 +43,8 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         with:
-          base: main
-          branch: release/${{ github.event.inputs.version }}
+          branch: main
+          base: release/${{ github.event.inputs.version }}
           delete-branch: true
           
         
