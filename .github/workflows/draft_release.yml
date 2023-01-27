@@ -49,6 +49,7 @@ jobs:
           base: main
           branch: release/${{ github.event.inputs.version }}
           delete-branch: true
+          title: Release v${{ github.event.inputs.version }} in main
       
       - name: Automatically Merge the Pull Request
         if: github.event.inputs.auto_merge_pr == 'true'
