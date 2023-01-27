@@ -24,7 +24,7 @@ jobs:
           git config user.email github-actions@github.com
           
       - name: Merge develop
-        run: git merge develo
+        run: git merge develop
 
       - name: Bump version in package.json
         run: |
