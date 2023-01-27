@@ -59,7 +59,7 @@ jobs:
         run: |
           gh pr merge ${{ steps.cpr.outputs.pull-request-number }} \
             --author-email github-actions@github.com \
-            --delete-branch
+            --delete-branch \
             --merge
           
           
