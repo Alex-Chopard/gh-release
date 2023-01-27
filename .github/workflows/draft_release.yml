@@ -15,9 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - name: Create release branch
-        run: git checkout -b release/${{ github.event.inputs.version }}
+        with:
+          ref: develop
 
       - name: Initialize mandatory git config
         run: |
@@ -37,10 +36,10 @@ jobs:
 
           echo "::set-output name=commit::$(git rev-parse HEAD)"
 
-      - name: Push new branch
-        run: git push origin release/${{ github.event.inputs.version }}
-
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
+        with:
+          base: main
+          branch: release/${{ github.event.inputs.version }}
           
         
