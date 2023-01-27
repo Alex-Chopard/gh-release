@@ -1,6 +1,6 @@
 # https://github.com/thomaseizinger/github-action-gitflow-release-workflow
 
-name: "Draft Release"
+name: "1 - Draft Release"
 
 on:
   workflow_dispatch:
