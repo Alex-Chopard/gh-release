@@ -41,5 +41,6 @@ jobs:
         with:
           base: main
           branch: release/${{ github.event.inputs.version }}
+          delete-branch: true
           
         
