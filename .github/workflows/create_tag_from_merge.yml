@@ -40,13 +40,11 @@ jobs:
           echo "release_version=$VERSION" >> $GITHUB_OUTPUT
           
   create_tag:
-    runs-on: ubuntu-latest
     needs: gather_versions
-    steps:
-      - uses: Alex-Chopard/gh-release/.github/workflows/create_tag.yml@main
-        with:
-          release_version: ${{ needs.gather_versions.outputs.release_version }}
-          pr_number: ${{ github.event.number }}
+    uses: Alex-Chopard/gh-release/.github/workflows/create_tag.yml@main
+    with:
+      release_version: ${{ needs.gather_versions.outputs.release_version }}
+      pr_number: ${{ github.event.number }}
 
           
           
