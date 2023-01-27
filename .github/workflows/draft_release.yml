@@ -8,6 +8,11 @@ on:
       version:
         description: 'Version'
         required: true
+      auto_merge_pr:
+        type: boolean
+        description: 'Automatically merge the Pull Request'
+        required: true
+        default: false
 
 jobs:
   draft-release:
@@ -38,10 +43,17 @@ jobs:
           git commit -m "🔖 Bump version to ${{ github.event.inputs.version }}"
 
       - name: Create pull request
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           base: main
           branch: release/${{ github.event.inputs.version }}
           delete-branch: true
+      
+      - name: Automatically merge the Pull Request
+        if: github.event.inputs.auto_merge_pr == 'true'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           
         
