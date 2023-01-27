@@ -24,7 +24,7 @@ jobs:
           BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
           VERSION=${BRANCH_NAME#release/}
 
-          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Extract version from branch name (for hotfix branches)
         if: startsWith(github.event.pull_request.head.ref, 'hotfix/')
@@ -32,12 +32,12 @@ jobs:
           BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
           VERSION=${BRANCH_NAME#hotfix/}
 
-          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=$VERSION" >> $GITHUB_OUTPUT
           
   create-tag:
     uses: Alex-Chopard/gh-release/.github/workflows/create_tag.yml@main
     with:
-      release_version: ${{ env.RELEASE_VERSION }}
+      release_version: ${{ steps.random-color-generator.outputs.RELEASE_VERSION }}
       pr_number: ${{ github.event.number }}
 
           
