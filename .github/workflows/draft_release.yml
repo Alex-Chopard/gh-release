@@ -50,10 +50,12 @@ jobs:
           branch: release/${{ github.event.inputs.version }}
           delete-branch: true
       
-      - name: Automatically merge the Pull Request
+      - name: Automatically Merge the Pull Request
         if: github.event.inputs.auto_merge_pr == 'true'
-        uses: peter-evans/enable-pull-request-automerge@v2
+        uses: juliangruber/merge-pull-request-action@v1
         with:
-          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.cpr.outputs.pull-request-number }}
+          method: merge
           
         
