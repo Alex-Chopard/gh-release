@@ -1,6 +1,6 @@
 # see: https://github.com/thomaseizinger/github-action-gitflow-release-workflow
 
-name: "2 - Create Release Tag"
+name: "2.1 - Create Tag From Merge"
 
 on:
   pull_request:
@@ -34,21 +34,12 @@ jobs:
 
           echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
           
-      - uses: actions/checkout@v3
-        with:
-          ref: main
-
-      - name: Initialize mandatory git config
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          
       - name: Create Tag
-        run: |
-          git tag -a v${{ env.RELEASE_VERSION }} -m "v${{ env.RELEASE_VERSION }}" -m "See: #${{ github.event.number }} for more details."
-          git push --tags      
-          
-          
+        uses: Alex-Chopard/gh-release/edit/develop/.github/workflows/create_tag.yml@main
+        with:
+          release_version: ${{ env.RELEASE_VERSION }}
+          pr_number: ${{ github.event.number }}
+
           
           
           
