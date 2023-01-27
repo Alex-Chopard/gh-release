@@ -45,7 +45,7 @@ jobs:
           
       - name: Create Tag
         run: |
-          git tag -a v${{ env.RELEASE_VERSION }} -m "See: #${{ github.event.number }} for more details."
+          git tag -a v${{ env.RELEASE_VERSION }} -m "v${{ env.RELEASE_VERSION }}\n\tSee: #${{ github.event.number }} for more details."
           git push --tags      
           
           
