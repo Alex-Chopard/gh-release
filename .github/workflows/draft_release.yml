@@ -25,7 +25,7 @@ jobs:
           
       - name: Merge develop
         run: |
-          git chechout develop
+          git checkout develop
           git pull --rebase
           git checkout main
           git merge develop
