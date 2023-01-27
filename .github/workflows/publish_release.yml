@@ -45,7 +45,7 @@ jobs:
           
       - name: Create Tag
         run: |
-          git tag -a v${{ env.RELEASE_VERSION }}
+          git tag -a v${{ env.RELEASE_VERSION }} -m "v${{ env.RELEASE_VERSION }}"
           git push --tags
       
           
