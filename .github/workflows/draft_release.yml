@@ -68,8 +68,8 @@ jobs:
     uses: Alex-Chopard/gh-release/.github/workflows/create_tag.yml@main
     if: github.event.inputs.auto_merge_pr == 'true'
     with:
-      release_version: ${{ needs.gather_versions.outputs.release_version }}
-      pr_number: ${{ github.event.number }}
+      release_version: ${{ github.event.inputs.version }}
+      pr_number: ${{ needs.draft_release.outputs.pr_number }}
       
 
         
