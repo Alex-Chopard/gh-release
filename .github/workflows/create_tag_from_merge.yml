@@ -10,7 +10,7 @@ on:
       - closed
 
 jobs:
-  release:
+  gather-versions:
     name: Publish new release
     runs-on: ubuntu-latest
     # only merged pull requests that begin with 'release/' or 'hotfix/' must trigger this job
@@ -34,11 +34,11 @@ jobs:
 
           echo "RELEASE_VERSION=$VERSION" >> $GITHUB_ENV
           
-      - name: Create Tag
-        uses: Alex-Chopard/gh-release/.github/workflows/create_tag.yml@main
-        with:
-          release_version: ${{ env.RELEASE_VERSION }}
-          pr_number: ${{ github.event.number }}
+  create-tag:
+    uses: Alex-Chopard/gh-release/.github/workflows/create_tag.yml@main
+    with:
+      release_version: ${{ env.RELEASE_VERSION }}
+      pr_number: ${{ github.event.number }}
 
           
           
