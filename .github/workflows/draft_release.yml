@@ -44,7 +44,6 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           base: main
-          branch: release/${{ github.event.inputs.version }}
           delete-branch: false
           
         
