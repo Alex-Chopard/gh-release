@@ -1,6 +1,6 @@
 # see: https://github.com/thomaseizinger/github-action-gitflow-release-workflow
 
-name: "Publish new release"
+name: "Create Release Tag"
 
 on:
   pull_request:
@@ -47,6 +47,7 @@ jobs:
         run: |
           git tag -a v${{ env.RELEASE_VERSION }} -m "v${{ env.RELEASE_VERSION }}"
           git push --tags
+          echo ${{ github.event }}
       
           
           
